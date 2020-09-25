@@ -3,31 +3,31 @@
       <div class="container_box">
           <!-- 注册标题 -->
           <div class="signTitle">注册</div>
-          <el-form class="signform" label-width="80px">
+          <el-form :model="formData" class="signform" label-width="80px">
               <el-form-item label="用户名">
-                  <el-input  clearable></el-input>
+                  <el-input v-model="formData.username" clearable></el-input>
               </el-form-item>
               <el-form-item label="密码">
-                  <el-input  show-password></el-input>
+                  <el-input v-model="formData.password1" show-password></el-input>
               </el-form-item>
               <el-form-item label="确认密码">
-                  <el-input type="password" show-password></el-input>
+                  <el-input v-model="formData.password2" type="password" show-password></el-input>
               </el-form-item>
               <el-form-item label="联系电话">
-                  <el-input clearable></el-input>
+                  <el-input v-model="formData.tel" clearable></el-input>
               </el-form-item>
               <el-form-item label="电子邮箱">
-                  <el-input  clearable></el-input>
+                  <el-input v-model="formData.email" clearable></el-input>
               </el-form-item>
               <el-form-item label="姓名">
-                  <el-input clearable></el-input>
+                  <el-input v-model="formData.name" clearable></el-input>
               </el-form-item>
               <el-form-item label="身份证">
-                  <el-input clearable></el-input>
+                  <el-input v-model="formData.idcard" clearable></el-input>
               </el-form-item>
               <el-row class="flexbt">
                   <el-button size="medium">注册</el-button>
-                  <el-button @click="loginTop">取消</el-button>
+                  <el-button @click="loginTop">取消</el-button> 
               </el-row>
           </el-form>
       </div>
@@ -39,12 +39,20 @@ export default {
     name:"SignIn",
     data(){
         return {
-           
+           formData:{
+               username:"",
+               passwoed1:"",
+               passwoed2:"",
+               tel:"",
+               email:"",
+               name:"",
+               idcard:"" 
+           },
         }
     },
     methods:{
         loginTop:function(){
-            this.$router.push("/login");
+           this.$router.push("/login");
         }
     }
 }

@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Login from "../components/login.vue"
 import SignIn from "../components/signIn.vue"
+import Index from "../components/index.vue"
 Vue.use(VueRouter);
 let router = new VueRouter({
     routes:[
@@ -15,7 +16,24 @@ let router = new VueRouter({
         },{
             path:"/signIn",
             component:SignIn
+        },{
+            path:"/index",
+            component:Index
         }
     ]
+})
+// eslint-disable-next-line no-unused-vars
+router.beforeEach((to,from,next)=>{
+    if(to.path =="/login"){
+        next();
+    }else{
+        let token = window.sessionStorage.getItem("token");
+        console.log(token)
+        if(token){
+            next();
+        }else{
+            next("/login")
+        }
+    }
 })
 export default router;

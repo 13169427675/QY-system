@@ -7,19 +7,19 @@
 
           </div> 
           <!-- 表单内容 -->
-          <el-form :model="formData" class="formStyle" :rules="formRules">
-              <el-form-item  prop="name">
+          <el-form :model="formData" ref="login" class="formStyle" :rules="rules">
+              <el-form-item  prop="userName">
                   <el-input  type="text" placeholder="请输入用户名" v-model="formData.userName">
                       <i slot="prefix" class="iconfont icon-user"></i>
                   </el-input>
               </el-form-item>
-               <el-form-item prop="psword">
+               <el-form-item prop="passWord">
                   <el-input type="passWord"  placeholder="请输入密码" v-model="formData.passWord">
                       <i slot="prefix" class="iconfont icon-icon_password"></i>
                   </el-input>
               </el-form-item>
               <el-row class="flexbt">
-                  <el-button>登录</el-button>
+                  <el-button @click="loginTop">登录</el-button>
                   <el-button @click="signTop">注册</el-button>
               </el-row>
           </el-form>
@@ -37,20 +37,40 @@ export default {
                 userName:"",
                 passWord:""
             },
-            formRules:{
-                name:[
-                    {required:true,message:"用户名不能为空",trigger:"blur"},
+            rules: {
+                userName: [
+                    { required: true, message: '请输入活动名称', trigger: 'blur' },
                     { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
                 ],
-                psword:[
+                passWord:[
                     {required:true,message:"密码不能为空",trigger:"blur"}
                 ]
             }
         }
     },
     methods:{
+        //点击注册时触发的函数
         signTop:function(){
             this.$router.push("/signIn")
+        },
+        //点击登录时触发的函数
+        loginTop:function(){
+            //获取form对象使用validate方法进行预校验
+            let formObj = this.$refs.login;
+            formObj.validate((resule)=>{
+                //校验不通过时提醒失败
+                if(!resule) return this.$message({
+                    message:"用户名或密码错误",
+                    type:"error"
+                })
+                //校验成功时跳转至主页
+                this.$message({
+                    message:"登录成功、欢迎回来！",
+                    type:"success"
+                })
+                window.sessionStorage.setItem("token","926");
+                this.$router.push("/index");
+            })
         }
     }
 }
