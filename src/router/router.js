@@ -24,7 +24,7 @@ let router = new VueRouter({
 })
 // eslint-disable-next-line no-unused-vars
 router.beforeEach((to,from,next)=>{
-    if(to.path =="/login"){
+    if(to.path =="/login" |to.path == "/signIn"){
         next();
     }else{
         let token = window.sessionStorage.getItem("token");
@@ -36,4 +36,4 @@ router.beforeEach((to,from,next)=>{
         }
     }
 })
-export default router;
+export default router; 

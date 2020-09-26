@@ -1,15 +1,20 @@
-let {user} = require("./schema");
-user.create({
-    user:"13169427675",
-    username:"随你",
-    password:"776543",
-    tel:13169427675,
-    email:"997884551@qq.com",
-    name:"林利军",
-    idcard:440223199604093710
-}).then((data)=>{
-    console.log("数据创建成功！");
-    console.log(data);
-}).catch((err)=>{
-    console.log("数据创建失败！",err);
-})
+const { user } = require("./schema");
+
+let {users} = require("./schema");
+module.exports = {
+    adds:function(req,res,err){
+        let datas = req.body;
+        users.find({user:datas.user}).then((data)=>{
+            let len = data.length;
+            if(len==0){
+                users.create(datas).then((data)=>{
+                    console.log("创建数据成功：添加数据为：",data);
+                })
+                res.send({create:"true"})
+            }else{
+                res.send({create:"false"});
+            }
+        })
+        
+    }
+}

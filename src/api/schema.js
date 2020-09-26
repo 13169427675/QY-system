@@ -17,13 +17,17 @@ let userlist = new schema({
         required:true,
         type:String
     },
-    password:{
+    password1:{
+        required:true,
+        type:String
+    },
+    password2:{
         required:true,
         type:String
     },
     tel:{
         required:true,
-        type:Number
+        type:String
     },
     email:{
         required:true,
@@ -35,7 +39,7 @@ let userlist = new schema({
     },
     idcard:{
         required:true,
-        type:Number
+        type:String
     },
     time:{
         required:true,
@@ -46,7 +50,7 @@ let userlist = new schema({
         }
     }
 })
-let user =mongoose.model("userlist",userlist);
+let users =mongoose.model("userlist",userlist);
 module.exports = {
-    user
+    users
 }
