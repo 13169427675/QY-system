@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
+import store from "./store/store"
 import "../src/assets/css/public.css"
 import "normalize.css"
 import "./assets/font/iconfont.css"
@@ -12,5 +13,6 @@ Vue.config.productionTip = false
 
 new Vue({
   render: h => h(App),
-  router
+  router,
+  store
 }).$mount('#app')

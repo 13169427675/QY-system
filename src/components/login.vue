@@ -37,8 +37,8 @@ export default {
         return {
             //响应式数据
             formData:{
-                userName:"",
-                passWord:""
+                userName:"13169427675",
+                passWord:"999926"
             },
             //预验证规则
             rules: {
@@ -69,23 +69,34 @@ export default {
                 })
                 //校验成功时、发起ajax请求校验账号密码
                 //url封装
-                let url = `/api/find?user=${this.formData.userName}&password1=${this.formData.passWord}`;
+                let url = `/api/userlogin?user=${this.formData.userName}&password1=${this.formData.passWord}`;
                 //发起get请求   
                 axios.get(url).then((resData)=>{
                     //对返回的resData数据进行相关验证及处理
                     let reg = resData.data.token;
-                    if(reg=="tokenfalse"){
+                    console.log("你的账号为",resData.data);
+                    let username = resData.data.username;
+                    if(reg==""){
                         this.$message({
                             type:"error",
                             message:"用户名或密码错误"
                         })
                     }else{
+                        if(resData.data.state){
                         window.sessionStorage.setItem("token",reg);
+                         window.sessionStorage.setItem("username",username);
+                         window.sessionStorage.setItem("user",this.formData.userName);
                         this.$router.push("/index");
                         this.$message({
                             type:"success",
-                            message:`登录成功、亲爱的${resData.data.username}欢迎回来`
-                        })
+                            message:`登录成功、亲爱的${username}欢迎回来`
+                        })}else{
+                            this.$message({
+                                type:"error",
+                                message:"你的账号已禁用、请联系管理员处理！"
+                            })
+                        }
+
                     }
                 })
 

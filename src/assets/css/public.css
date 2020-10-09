@@ -4,3 +4,12 @@ html,body,#app{
     padding: 0px;
     margin: 0px;
 }
+.mbx{
+    margin:15px 0px;
+}
+.el-table{
+    margin: 15px 0px;
+}
+.el-pagination{
+    margin-top: 15px;
+}
